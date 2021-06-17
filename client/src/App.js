@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import LoginContainer from "./Container/LoginContainer";
+import HomePageContainer from "./Container/HomePageContainer";
+import SwapContainer from "./Container/SwapContainer";
+import ClosetContainer from "./Container/ClosetContainer";
+import SwapClosetContainer from "./Container/SwapClosetContainer";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div>
+          <Route
+            exact
+            path="/login"
+            render={(routerProps) => <LoginContainer />}
+          />
+          <Route
+            exact
+            path="/home"
+            render={(routerProps) => <HomePageContainer />}
+          />
+          <Route
+            exact
+            path="/swap"
+            render={(routerProps) => <SwapContainer />}
+          />
+          <Route
+            exact
+            path="/closet"
+            render={(routerProps) => <ClosetContainer />}
+          />
+          <Route
+            exact
+            path="/swapCloset"
+            render={(routerProps) => <SwapClosetContainer />}
+          />
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
