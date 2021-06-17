@@ -7,13 +7,34 @@ import ClosetContainer from "./Container/ClosetContainer";
 import SwapClosetContainer from "./Container/SwapClosetContainer";
 
 class App extends Component {
+
+  constructor() {
+    super()
+    this.state = {
+      currentUser: {}
+    }
+  }
+  
+ handleLogin = (loginObj) => {
+   postConfig = {
+     method: 'POST',
+     headers: {
+      "Content-Type": "application/json"
+     },
+     body: JSON.stringify(loginObj)
+   }
+   fetch("http://localhost:3000/login", postConfig)
+    .then(res => res.json)
+    .then(result => console.log(result))
+ }
+
   render() {
     return (
       <Router>
         <div>
           <Route
             exact
-            path="/login"
+            path="/"
             render={(routerProps) => <LoginContainer />}
           />
           <Route
