@@ -2,7 +2,7 @@ class UsersController < ApplicationController
     skip_before_action :authorized, only: [:create, :login]
 
     def create
-        @user = User.create(user_params)
+        @user = User.create!(user_params)
         @token = encode_token(user_id: @user.id)
         render json: { user: UserSerializer.new(@user), jwt: @token }, status: :created
     rescue ActiveRecord::RecordInvalid => invalid

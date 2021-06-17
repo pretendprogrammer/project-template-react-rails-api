@@ -8,7 +8,7 @@ class HomePageContainer extends Component {
   render() {
     return (
       <div>
-        <ProfileComponent />
+        <ProfileComponent {...this.props.currentUser}/>
         <ClosetPreviewContainer />
         <FriendListContainer />
         <SwapListContainer />

@@ -50,7 +50,7 @@ class AddClothingFormComponent extends Component {
           </select>
           <label htmlFor="description">Description</label>
           <input
-            type="text"
+            type="textarea"
             id="description"
             name="description"
             value={this.state.description}

@@ -14,7 +14,7 @@ SwapClothing.destroy_all
 puts "Seeding new data"
 
 10.times do
-    User.create(username: Faker::Name.first_name+(Faker::Number.number(digits: 3).to_s), password_digest: BCrypt::Password.create(Faker::Science.scientist), bio: Faker::Movie.quote, spirit_color: Faker::Color.color_name, image_url: Faker::LoremFlickr.image)
+    User.create(username: Faker::Name.first_name+(Faker::Number.number(digits: 3).to_s), password_digest: BCrypt::Password.create('admin'), bio: Faker::Movie.quote, spirit_color: Faker::Color.hex_color, image_url: Faker::LoremFlickr.image)
 end
 
 40.times do

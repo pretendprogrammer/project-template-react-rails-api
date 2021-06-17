@@ -14,7 +14,7 @@ class LoginFormComponent extends Component {
       <div>
         <form onSubmit={event => {
           event.preventDefault()
-          this.props.handleLogin(this.state)} }>
+          this.props.handleLogin(this.state, this.props.history)} }>
           <label htmlFor="username">Username</label>
           <input onChange={(event) => this.setState({username: event.target.value})}
             type="text"

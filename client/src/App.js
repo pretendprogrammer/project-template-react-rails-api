@@ -15,8 +15,8 @@ class App extends Component {
     }
   }
   
- handleLogin = (loginObj) => {
-   postConfig = {
+ handleLogin = (loginObj, history) => {
+   const postConfig = {
      method: 'POST',
      headers: {
       "Content-Type": "application/json"
@@ -24,8 +24,36 @@ class App extends Component {
      body: JSON.stringify(loginObj)
    }
    fetch("http://localhost:3000/login", postConfig)
-    .then(res => res.json)
-    .then(result => console.log(result))
+    .then(res => res.json())
+    .then(userInfo => {
+      if(userInfo.error) {
+        alert(userInfo.error)
+      } else {
+        console.log(userInfo)
+        this.setState({currentUser: userInfo.user})
+        localStorage.token = userInfo.token
+        history.push("/home")
+      }
+    })
+ }
+
+ handleRegister = (registerObj) => {
+  const postConfig = {
+    method: 'POST',
+    headers: {
+     "Content-Type": "application/json"
+    },
+    body: JSON.stringify(registerObj)
+  }
+  fetch("http://localhost:3000/users", postConfig)
+    .then(res => res.json())
+    .then(userInfo => {
+      if(userInfo.error) {
+        alert(userInfo.error.join(';\n'))
+      } else {
+        alert('New user succesfully registered!\nPlease log in to continue...')
+      }
+    })
  }
 
   render() {
@@ -35,12 +63,12 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={(routerProps) => <LoginContainer />}
+            render={(routerProps) => <LoginContainer handleLogin={this.handleLogin} handleRegister={this.handleRegister} routerProps={routerProps} />}
           />
           <Route
             exact
             path="/home"
-            render={(routerProps) => <HomePageContainer />}
+            render={(routerProps) => <HomePageContainer currentUser={this.state.currentUser}/>}
           />
           <Route
             exact
