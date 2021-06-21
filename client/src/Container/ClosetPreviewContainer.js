@@ -5,9 +5,9 @@ class ClosetPreviewContainer extends Component {
   render() {
     return (
       <div>
-        {/* {this.props.clothing.map((clothing) => {
-          <ClothingComponent clothing={clothing} key={clothing.id} />;
-        })} */}
+        {this.props.clothings.map((clothing) => (
+          <ClothingComponent clothing={clothing} key={clothing.id} />
+        ))}
       </div>
     );
   }
