@@ -19,6 +19,7 @@ class AddClothingFormComponent extends Component {
   render() {
     return (
       <div>
+        <h3>Add a New Piece to Your Closet</h3>
         <form>
           <label htmlFor="name">Name</label>
           <input type="text" id="name" name="name" value={this.state.name} />
@@ -27,7 +28,7 @@ class AddClothingFormComponent extends Component {
           <label htmlFor="brand">Brand</label>
           <input type="text" id="brand" name="brand" value={this.state.brand} />
           <label htmlFor="size">Size</label>
-          <select id="size" name="size">
+          <select id="size" name="size" >
             <option selected="selected" disabled>
               Select Size
             </option>

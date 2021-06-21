@@ -6,8 +6,11 @@ class ClosetPreviewContainer extends Component {
     return (
       <div>
         {this.props.clothings.map((clothing) => (
-          <ClothingComponent clothing={clothing} key={clothing.id} />
+          <ClothingComponent clothing={clothing} key={clothing.id} parent={"closetPreviewContainer"}/>
         ))}
+        <button onClick={() =>
+          this.props.history.push("/closet")
+        }>Browse Your Closet</button>
       </div>
     );
   }

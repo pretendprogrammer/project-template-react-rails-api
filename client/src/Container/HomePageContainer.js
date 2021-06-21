@@ -9,12 +9,13 @@ class HomePageContainer extends Component {
     return (
       <div>
         <ProfileComponent {...this.props.currentUser} />
-        <ClosetPreviewContainer clothings={this.props.currentUser.clothings} />
+        <ClosetPreviewContainer clothings={this.props.currentUser.clothings} {...this.props.routerProps}/>
         <FriendListContainer />
         <SwapListContainer
           userSwaps={this.props.currentUser.swaps}
           currentUser={this.props.currentUser}
         />
+        <button onClick={() => this.props.handleLogout(this.props.routerProps.history)}>Log Out</button>
       </div>
     );
   }

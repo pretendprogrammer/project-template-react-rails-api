@@ -25,7 +25,7 @@ end
     Swap.create(start: Faker::Time.between(from: DateTime.now, to: DateTime.now + 1), end: Faker::Time.between(from: DateTime.now + 1, to: DateTime.now + 2), name: Faker::Subscription.plan)
 end
 
-5.times do
+15.times do
     SwapUser.create(user_id: User.ids.sample, swap_id: Swap.ids.sample, credits: Faker::Number.number(digits: 1))
 end
 

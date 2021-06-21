@@ -4,7 +4,7 @@ import SwapsJoinedComponent from "../Component/SwapsJoinedComponent";
 
 class SwapListContainer extends Component {
   state = {
-    swapListArray: [],
+    allSwapsArray: [],
   };
 
   componentDidMount() {
@@ -19,7 +19,7 @@ class SwapListContainer extends Component {
           start: new Date(swap.start),
           end: new Date(swap.end),
         }));
-        this.setState({ swapListArray: optimizedArray });
+        this.setState({ allSwapsArray: optimizedArray });
       });
   }
 
@@ -30,22 +30,23 @@ class SwapListContainer extends Component {
       end: new Date(swap.end),
     }));
 
+    let futureJoinedSwaps = optimizedJoinedSwaps.filter(swap => swap.end > new Date())
+
+    let unjoinedSwaps = [...this.state.allSwapsArray]
+
+    optimizedJoinedSwaps.forEach((joinedSwap) => {
+      let index = unjoinedSwaps.findIndex((element) => element.id === joinedSwap.id)
+      unjoinedSwaps.splice(index, 1)
+    })
+
+    let filteredUnjoinedSwaps = unjoinedSwaps.filter(swap => swap.start > new Date())
+
     return (
       <div>
-        {optimizedJoinedSwaps.map((swap) => (
+        {futureJoinedSwaps.map((swap) => (
           <SwapsJoinedComponent {...swap} key={swap.id} />
         ))}
-        {this.state.swapListArray
-          .filter((swap) => {
-            debugger;
-            return (
-              swap.start > new Date() &&
-              this.props.currentUser.swaps.includes(swap) === false
-            );
-          })
-          .map((swap) => (
-            <SwapsAvailableComponent {...swap} key={swap.id} />
-          ))}
+        {filteredUnjoinedSwaps.map(swap => <SwapsAvailableComponent {...swap} key={swap.id}/>)}
       </div>
     );
   }

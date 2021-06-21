@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  # resources :clothings
+  resources :clothings, only: [:destroy]
   # resources :swap_clothings
   # resources :swap_users
   resources :swaps, only: [:index]

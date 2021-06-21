@@ -8,10 +8,12 @@ class SwapsJoinedComponent extends Component {
         {this.props.start.toLocaleString("en-US", {
           timeStyle: "short",
           dateStyle: "medium",
+          // timeZone: "EST",
         })}{" "}
         -{" "}
         {this.props.end.toLocaleString("en-US", {
           timeStyle: "short",
+          // timeZone: "EST",
         })}
         <button>Enter Swap</button>
       </div>

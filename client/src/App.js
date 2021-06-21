@@ -5,6 +5,7 @@ import HomePageContainer from "./Container/HomePageContainer";
 import SwapContainer from "./Container/SwapContainer";
 import ClosetContainer from "./Container/ClosetContainer";
 import SwapClosetContainer from "./Container/SwapClosetContainer";
+import { withRouter } from 'react-router-dom'
 
 class App extends Component {
   constructor() {
@@ -12,6 +13,16 @@ class App extends Component {
     this.state = {
       currentUser: {},
     };
+  }
+  
+  handleDeleteClothing = (clothingId) => {
+    fetch(`http://localhost:3000/clothings/${clothingId}`, {headers: { Authorization: `Bearer ${localStorage.token}` }, method: 'DELETE'})
+      .then(res => res.json())
+      .then(() => {
+        let updatedUser = {...this.state.currentUser}
+        updatedUser.clothings = updatedUser.clothings.filter(clothing => clothing.id !== clothingId)
+        this.setState({currentUser: updatedUser})
+      })
   }
 
   handleLogin = (loginObj, history) => {
@@ -35,6 +46,12 @@ class App extends Component {
         }
       });
   };
+
+  handleLogout = (history) => {
+    history.push("/")
+    this.setState({currentUser: {}})
+    localStorage.clear()
+  }
 
   handleRegister = (registerObj) => {
     const postConfig = {
@@ -76,7 +93,7 @@ class App extends Component {
             exact
             path="/home"
             render={(routerProps) => (
-              <HomePageContainer currentUser={this.state.currentUser} />
+              <HomePageContainer currentUser={this.state.currentUser} routerProps={routerProps} handleLogout={this.handleLogout}/>
             )}
           />
           <Route
@@ -87,7 +104,7 @@ class App extends Component {
           <Route
             exact
             path="/closet"
-            render={(routerProps) => <ClosetContainer />}
+            render={(routerProps) => <ClosetContainer currentUser={this.state.currentUser} handleDeleteClothing={this.handleDeleteClothing}/>}
           />
           <Route
             exact
@@ -100,4 +117,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

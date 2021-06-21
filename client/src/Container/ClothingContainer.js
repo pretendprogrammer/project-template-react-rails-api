@@ -5,7 +5,7 @@ class ClothingContainer extends Component {
   render() {
     return (
       <div>
-        {/* {this.props.clothing.map(clothing => {<ClothingComponent clothing={clothing} key={clothing.id} />})} */}
+        {this.props.clothings.map(clothing => <ClothingComponent parent={"clothingContainer"} clothing={clothing} key={clothing.id} handleDeleteClothing={this.props.handleDeleteClothing}/>)}
       </div>
     );
   }
