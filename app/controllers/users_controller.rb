@@ -9,6 +9,11 @@ class UsersController < ApplicationController
             render json: { error: invalid.record.errors.full_messages }, status: :not_acceptable
     end
 
+    def index
+        users = User.all
+        render json: users
+    end
+
     def login
         @user = User.find_by(username: user_login_params[:username])
         if @user && @user.authenticate(user_login_params[:password])

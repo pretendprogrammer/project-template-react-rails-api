@@ -14,7 +14,10 @@ class ClosetContainer extends Component {
     return (
       <div>
         <h1>Closet</h1>
-        <ClothingContainer clothings={this.props.currentUser.clothings} handleDeleteClothing={this.props.handleDeleteClothing}/>
+        <ClothingContainer
+          clothings={this.props.clothings}
+          handleDeleteClothing={this.props.handleDeleteClothing}
+        />
         {this.state.user ? <AddClothingFormComponent /> : null}
       </div>
     );

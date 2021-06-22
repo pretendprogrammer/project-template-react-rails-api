@@ -5,7 +5,9 @@ class FriendListContainer extends Component {
   render() {
     return (
       <div>
-        {/* {this.props.friends.map(friend => {<FriendComponent friend={friend} key={friend.id}/>})} */}
+        {this.props.friends.map((friend) => {
+          <FriendComponent friend={friend} key={friend.id} />;
+        })}
       </div>
     );
   }

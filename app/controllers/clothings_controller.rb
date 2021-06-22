@@ -6,6 +6,11 @@ rescue_from ActiveRecord::RecordNotFound, with: :clothing_not_found
         render json: {}, status: :accepted
     end
 
+    def index_user_clothings
+        user_clothings = Clothing.where(user_id: params[:user_id])
+        render json: user_clothings
+    end
+
     private
 
     def find_clothing
