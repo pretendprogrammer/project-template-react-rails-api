@@ -22,8 +22,9 @@ end
 end
 
 4.times do
-    Swap.create(start: Faker::Time.between(from: DateTime.now, to: DateTime.now + 1), end: Faker::Time.between(from: DateTime.now + 1, to: DateTime.now + 2), name: Faker::Subscription.plan)
+    Swap.create(start: Faker::Time.between(from: DateTime.now, to: DateTime.now - 1), end: Faker::Time.between(from: DateTime.now + 1, to: DateTime.now + 2), name: Faker::Subscription.plan)
 end
+
 
 15.times do
     SwapUser.create(user_id: User.ids.sample, swap_id: Swap.ids.sample, credits: Faker::Number.number(digits: 1))
@@ -32,5 +33,7 @@ end
 15.times do
     SwapClothing.create(clothing_id: Clothing.ids.sample, swap_id: Swap.ids.sample, prev_owner_id: User.ids.sample)
 end
+
+Swap.create(start: DateTime.now + 1, end: DateTime.now + 2, name: "Test Swap")
 
 puts 'Seeded new data!'

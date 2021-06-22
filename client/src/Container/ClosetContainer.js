@@ -18,6 +18,7 @@ class ClosetContainer extends Component {
         {(this.props.currentClosetUser.id === this.props.currentUser.id) 
         ? <AddClothingFormComponent currentUserId={this.props.currentUser.id} addClothing={this.props.addClothing} /> 
         : null}
+        <button onClick={() => this.props.routerProps.history.push("/home")}>Back to Home</button>
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 class SwapsAvailableComponent extends Component {
+
   render() {
     return (
       <div>
@@ -15,7 +16,10 @@ class SwapsAvailableComponent extends Component {
           timeStyle: "short",
           // timeZone: "EST",
         })}
-        <button>Join Swap</button>
+        <button onClick={() => {
+          this.props.history.push("/swapCloset")
+        }}
+        >Join Swap</button>
       </div>
     );
   }

@@ -5,7 +5,7 @@ class ClothingContainer extends Component {
   render() {
     return (
       <div>
-        {/* {this.props.swapClothings.map(clothing => <ClothingComponent parent={"swapClosetClothingContainer"} {...clothing} key={clothing.id} />)} */}
+        {this.props.clothings.map(clothing => <ClothingComponent parent={"swapClosetClothingContainer"} clothing={clothing} key={clothing.id} {...this.props.routerProps}/>)}
       </div>
     );
   }

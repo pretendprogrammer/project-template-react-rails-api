@@ -19,7 +19,7 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
+  getAllUsers = () => {
     fetch("http://localhost:3000/users", {
       method: "GET",
       headers: {
@@ -63,6 +63,7 @@ class App extends Component {
           console.log(userInfo);
           this.setState({ currentUser: userInfo.user });
           localStorage.token = userInfo.jwt;
+          this.getAllUsers()
           // this.getUserClothing(this.state.currentUser.id);
           history.push("/home");
         }
@@ -188,7 +189,7 @@ class App extends Component {
           <Route
             exact
             path="/swapCloset"
-            render={(routerProps) => <SwapClosetContainer />}
+            render={(routerProps) => <SwapClosetContainer clothings={this.state.clothings} getUserClothing={this.getUserClothing} currentUser={this.state.currentUser} routerProps={routerProps}/>}
           />
         </div>
       </Router>

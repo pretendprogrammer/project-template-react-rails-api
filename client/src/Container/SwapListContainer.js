@@ -46,7 +46,7 @@ class SwapListContainer extends Component {
         {futureJoinedSwaps.map((swap) => (
           <SwapsJoinedComponent {...swap} key={swap.id} />
         ))}
-        {filteredUnjoinedSwaps.map(swap => <SwapsAvailableComponent {...swap} key={swap.id}/>)}
+        {filteredUnjoinedSwaps.map(swap => <SwapsAvailableComponent {...this.props.routerProps} {...swap} key={swap.id}/>)}
       </div>
     );
   }

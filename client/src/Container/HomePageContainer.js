@@ -20,6 +20,7 @@ class HomePageContainer extends Component {
         <SwapListContainer
           userSwaps={this.props.currentUser.swaps}
           currentUser={this.props.currentUser}
+          routerProps={this.props.routerProps}
         />
         <button
           onClick={() =>

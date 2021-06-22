@@ -52,7 +52,14 @@ class ClothingComponent extends Component {
                   >
                     View Details
                   </button>
+                : this.props.parent === "swapClosetClothingContainer"
+                ? <button
+                // push clothing object to array of clothes to be swapped
+                // change button name to Remove from Swap
+                // Remove button removes from array
+                >Add to Swap</button>
                 : null}
+
               </div>
             )}
           />
