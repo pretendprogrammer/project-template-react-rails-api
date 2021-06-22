@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   
-  resources :clothings, only: [:destroy]
+  resources :clothings, only: [:destroy, :show]
   post '/get_clothings', to: 'clothings#index_user_clothings'
-  get '/get_clothings', to: 'clothings#index_user_clothings'
+  # get '/get_clothings', to: 'clothings#index_user_clothings'
   # resources :swap_clothings
   # resources :swap_users
   resources :swaps, only: [:index]

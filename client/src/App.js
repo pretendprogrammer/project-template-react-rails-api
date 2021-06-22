@@ -6,6 +6,7 @@ import SwapContainer from "./Container/SwapContainer";
 import ClosetContainer from "./Container/ClosetContainer";
 import SwapClosetContainer from "./Container/SwapClosetContainer";
 import { withRouter } from "react-router-dom";
+import ClothingDetailsComponent from "./Component/ClothingDetailsComponent";
 
 class App extends Component {
   constructor() {
@@ -145,6 +146,7 @@ class App extends Component {
                 currentUser={this.state.currentUser}
                 handleDeleteClothing={this.handleDeleteClothing}
                 clothings={this.state.clothings}
+                routerProps={routerProps}
               />
             )}
           />

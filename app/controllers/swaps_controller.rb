@@ -4,4 +4,6 @@ class SwapsController < ApplicationController
         swaps = Swap.all
         render json: swaps, status: :ok
     end
+
+    
 end

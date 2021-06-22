@@ -17,6 +17,7 @@ class ClosetContainer extends Component {
         <ClothingContainer
           clothings={this.props.clothings}
           handleDeleteClothing={this.props.handleDeleteClothing}
+          routerProps={this.props.routerProps}
         />
         {this.state.user ? <AddClothingFormComponent /> : null}
       </div>
