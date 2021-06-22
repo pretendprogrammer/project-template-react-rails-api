@@ -1,5 +1,6 @@
 class ClothingsController < ApplicationController
 rescue_from ActiveRecord::RecordNotFound, with: :clothing_not_found
+rescue_from ActiveRecord::RecordInvalid, with: :show_errors
 before_action :find_clothing, only: [:show, :destroy, :update]
 
     def destroy
@@ -11,9 +12,14 @@ before_action :find_clothing, only: [:show, :destroy, :update]
         render json: @clothing
     end
 
+    def create
+        new_clothing = Clothing.create!(clothing_params)
+        render json: new_clothing, status: :created
+    end
+
     def update
-        @clothing.update(clothing_params)
-        render json: @clothing, status :accepted
+        @clothing.update!(clothing_params)
+        render json: @clothing, status: :accepted
     end
 
     def index_user_clothings
@@ -32,6 +38,10 @@ before_action :find_clothing, only: [:show, :destroy, :update]
     end
 
     def clothing_params
-        params.permit(:name, :color, :brand, :category, :image_url, :condition, :description, :size, :value)
+        params.permit(:name, :color, :brand, :category, :image_url, :condition, :description, :size, :value, :user_id)
+    end
+
+    def show_errors(exception)
+        render json: {error: exception.record.errors.full_messages}, status: :unprocessable_entity
     end
 end

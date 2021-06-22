@@ -5,7 +5,6 @@ import HomePageContainer from "./Container/HomePageContainer";
 import SwapContainer from "./Container/SwapContainer";
 import ClosetContainer from "./Container/ClosetContainer";
 import SwapClosetContainer from "./Container/SwapClosetContainer";
-import { withRouter } from "react-router-dom";
 import ClothingDetailsComponent from "./Component/ClothingDetailsComponent";
 
 class App extends Component {
@@ -15,7 +14,21 @@ class App extends Component {
       currentUser: {},
       allUsers: [],
       clothings: [],
+      allUsers: [],
+      currentClosetUser: {}
     };
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:3000/users", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.token}`,
+        "Content-Type": "application/json"
+      }
+    })
+    .then(res => res.json())
+    .then(allUsersArray => this.setState({allUsers: allUsersArray}))
   }
 
   handleDeleteClothing = (clothingId) => {
@@ -50,7 +63,7 @@ class App extends Component {
           console.log(userInfo);
           this.setState({ currentUser: userInfo.user });
           localStorage.token = userInfo.jwt;
-          this.getUserClothing(this.state.currentUser.id);
+          // this.getUserClothing(this.state.currentUser.id);
           history.push("/home");
         }
       });
@@ -83,7 +96,7 @@ class App extends Component {
       });
   };
 
-  getUserClothing = (userId) => {
+  getUserClothing = (userObj) => {
     fetch(`http://localhost:3000/get_clothings`, {
       method: "POST",
       headers: {
@@ -91,16 +104,34 @@ class App extends Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        user_id: userId,
+        user_id: userObj.id,
       }),
     })
       .then((res) => res.json())
       .then((clothingsArray) =>
         this.setState({
           clothings: clothingsArray,
+          currentClosetUser: userObj
         })
       );
   };
+
+  addClothing = (clothingObj) => {
+    fetch("http://localhost:3000/clothings", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(clothingObj)
+    })
+    .then(res => res.json())
+    .then(newClothingObj => {
+      this.setState({
+        clothings: [...this.state.clothings, newClothingObj]
+      })
+    })
+  }
 
   render() {
     let friendsArray = this.state.allUsers.filter(
@@ -130,6 +161,7 @@ class App extends Component {
                 routerProps={routerProps}
                 handleLogout={this.handleLogout}
                 friends={friendsArray}
+                getUserClothing={this.getUserClothing}
               />
             )}
           />
@@ -147,6 +179,9 @@ class App extends Component {
                 handleDeleteClothing={this.handleDeleteClothing}
                 clothings={this.state.clothings}
                 routerProps={routerProps}
+                addClothing={this.addClothing}
+                getUserClothing={this.getUserClothing}
+                currentClosetUser={this.state.currentClosetUser}
               />
             )}
           />
@@ -161,4 +196,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+export default App;

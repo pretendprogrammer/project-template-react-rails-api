@@ -10,10 +10,13 @@ class HomePageContainer extends Component {
       <div>
         <ProfileComponent {...this.props.currentUser} />
         <ClosetPreviewContainer
+          currentUser={this.props.currentUser}
           clothings={this.props.clothings}
-          {...this.props.routerProps}
+          routerProps={this.props.routerProps}
+          getUserClothing={this.props.getUserClothing}
         />
-        <FriendListContainer friends={this.props.friends} />
+        <FriendListContainer friends={this.props.friends} getUserClothing={this.props.getUserClothing} routerProps={this.props.routerProps}
+ />
         <SwapListContainer
           userSwaps={this.props.currentUser.swaps}
           currentUser={this.props.currentUser}

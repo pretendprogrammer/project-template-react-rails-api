@@ -1,27 +1,9 @@
 import React, { Component } from "react";
 import ClothingDetailsComponent from "../Component/ClothingDetailsComponent";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-
-// import { Modal, Image } from 'semantic-ui-react'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class ClothingComponent extends Component {
   state = { viewClothing: {} };
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     show: false
-  //   };
-  //   this.showModal = this.showModal.bind(this);
-  //   this.hideModal = this.hideModal.bind(this);
-  // }
-
-  // showModal = () => {
-  //   this.setState({ show: true });
-  // };
-
-  // hideModal = () => {
-  //   this.setState({ show: false });
-  // };
 
   toggleDetails = () => {
     this.setState({ seeDetails: !this.state.seeDetails });
@@ -41,43 +23,41 @@ class ClothingComponent extends Component {
 
   render() {
     return (
-      <Router>
-        <div>
-          {/* <Modal trigger={<button>View Details</button>} open={this.state.show} onOpen={this.showModal} onClose={this.hideModal}>
-          <Modal.Header>{this.props.clothing.name}</Modal.Header>
-          <Modal.Content image><Image src={this.props.clothing.image_url}/></Modal.Content>
-          <Modal.Description>{this.props.clothing.description}</Modal.Description>
-        </Modal> */}
+      <div>
+        <Switch>
           <Route
             exact
-            path="/clothingDetails"
-            render={(routerProps) => (
+            path={`${this.props.match.url}/:clothingId`}
+            render={(routerProps) =>
               <ClothingDetailsComponent
                 {...this.state.viewClothing}
                 handleDeleteClothing={this.props.handleDeleteClothing}
               />
+            }
+          />
+          <Route
+            path={this.props.match.path}
+            render={(routerProps) => (
+              <div>
+                <img src={this.props.clothing.image_url} alt={this.props.clothing.name} />
+                {this.props.clothing.name}
+                {this.props.parent === "clothingContainer" ?
+                  <button
+                  onClick={() => {
+                    this.getIndividualClothing(this.props.clothing.id);
+                    // this.props.history.push("/home") <- This works fine
+                    debugger
+                    this.props.history.push(`${this.props.match.url}/${this.props.clothing.id}`);
+                  }}
+                  >
+                    View Details
+                  </button>
+                : null}
+              </div>
             )}
           />
-          <div>
-            <img
-              src={this.props.clothing.image_url}
-              alt={this.props.clothing.name}
-            />
-            {this.props.clothing.name}
-          </div>
-          {/* Conditionally render so not available in closet preview */}
-          {this.props.parent === "clothingContainer" ? (
-            <button
-              onClick={() => {
-                this.getIndividualClothing(this.props.clothing.id);
-                this.props.history.push("/clothingDetails");
-              }}
-            >
-              View Details
-            </button>
-          ) : null}
-        </div>
-      </Router>
+        </Switch>
+      </div>
     );
   }
 }

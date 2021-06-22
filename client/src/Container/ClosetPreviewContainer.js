@@ -2,14 +2,19 @@ import React, { Component } from "react";
 import ClothingComponent from "../Component/ClothingComponent";
 
 class ClosetPreviewContainer extends Component {
+
+  componentDidMount() {
+    this.props.getUserClothing(this.props.currentUser)
+  }
+
   render() {
     return (
       <div>
         {this.props.clothings.map((clothing) => (
-          <ClothingComponent clothing={clothing} key={clothing.id} parent={"closetPreviewContainer"}/>
+          <ClothingComponent clothing={clothing} key={clothing.id} parent={"closetPreviewContainer"} {...this.props.routerProps}/>
         ))}
         <button onClick={() =>
-          this.props.history.push("/closet")
+          this.props.routerProps.history.push("/closet")
         }>Browse Your Closet</button>
       </div>
     );

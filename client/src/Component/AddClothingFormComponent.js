@@ -11,24 +11,34 @@ class AddClothingFormComponent extends Component {
       condition: "",
       description: "",
       value: "",
-      imageURL: "",
+      image_url: "",
       category: "",
+      user_id: ""
     };
+  }
+
+  componentDidMount() {
+    this.setState({
+      user_id: this.props.currentUserId
+    })
   }
 
   render() {
     return (
       <div>
         <h3>Add a New Piece to Your Closet</h3>
-        <form>
+        <form onSubmit={(event) => {
+          event.preventDefault()
+          this.props.addClothing(this.state)
+        }}>
           <label htmlFor="name">Name</label>
-          <input type="text" id="name" name="name" value={this.state.name} />
+          <input onChange={(event) => this.setState({name: event.target.value})} type="text" id="name" name="name" value={this.state.name} />
           <label htmlFor="color">Color</label>
-          <input type="text" id="color" name="color" value={this.state.color} />
+          <input onChange={(event) => this.setState({color: event.target.value})}type="text" id="color" name="color" value={this.state.color} />
           <label htmlFor="brand">Brand</label>
-          <input type="text" id="brand" name="brand" value={this.state.brand} />
+          <input onChange={(event) => this.setState({brand: event.target.value})}type="text" id="brand" name="brand" value={this.state.brand} />
           <label htmlFor="size">Size</label>
-          <select id="size" name="size" >
+          <select onChange={(event) => this.setState({size: event.target.value})}id="size" name="size" >
             <option selected="selected" disabled>
               Select Size
             </option>
@@ -39,7 +49,7 @@ class AddClothingFormComponent extends Component {
             <option value="xl">XL</option>
           </select>
           <label htmlFor="condition">Condition</label>
-          <select id="condition" name="condition">
+          <select onChange={(event) => this.setState({condition: event.target.value})}id="condition" name="condition">
             <option selected="selected" disabled>
               Select Condition
             </option>
@@ -51,23 +61,24 @@ class AddClothingFormComponent extends Component {
           </select>
           <label htmlFor="description">Description</label>
           <input
+            onChange={(event) => this.setState({description: event.target.value})}
             type="textarea"
             id="description"
             name="description"
             value={this.state.description}
           />
           <label htmlFor="value">Value</label>
-          <input type="text" id="value" name="value" value={this.state.value} />
-          <label htmlFor="imageURL">Picture</label>
+          <input onChange={(event) => this.setState({value: event.target.value})}type="text" id="value" name="value" value={this.state.value} />
+          <label htmlFor="image_url">Picture</label>
           <input
+            onChange={(event) => this.setState({image_url: event.target.value})}
             type="text"
-            id="imageURL"
-            name="imageURL"
-            value={this.state.imageURL}
+            id="image_url"
+            name="image_url"
+            value={this.state.image_url}
           />
           <label htmlFor="category">Category</label>
-          <label htmlFor="condition">Condition</label>
-          <select id="condition" name="condition">
+          <select onChange={(event) => this.setState({category: event.target.value})}id="category" name="category">
             <option selected="selected" disabled>
               Select Category
             </option>
@@ -78,7 +89,7 @@ class AddClothingFormComponent extends Component {
             <option value="accessory">Accessory</option>
             <option value="socks">Socks</option>
           </select>
-          <input type="submit" value="Swap!" />
+          <input type="submit" value="Add!" />
         </form>
       </div>
     );

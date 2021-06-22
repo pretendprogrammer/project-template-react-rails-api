@@ -5,7 +5,12 @@ class FriendComponent extends Component {
     return (
       <div>
         <h4>{this.props.friend.username}</h4>
-        <button>View Closet</button>
+        <button
+        onClick={() => {
+          this.props.getUserClothing(this.props.friend)
+          this.props.history.push("/closet")
+        }}
+        >View Closet</button>
       </div>
     );
   }
