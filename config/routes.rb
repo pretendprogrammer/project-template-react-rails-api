@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :swap_clothings, only: [:create]
   resources :swap_users, only: [:create]
   resources :swaps, only: [:index, :show]
+  get '/current_swap_users', to: 'swap_users#current_swap_users'
   resources :users, only: [:create, :index, :show]
   # resources :usernames
 

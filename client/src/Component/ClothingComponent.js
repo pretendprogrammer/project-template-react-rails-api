@@ -26,7 +26,7 @@ class ClothingComponent extends Component {
       },
     })
       .then((res) => res.json())
-      .then((clothingItem) => this.setState({ viewClothing: clothingItem }, () => this.props.history.push({pathname: "/clothingDetails",  state: {viewClothing: this.state.viewClothing}})))
+      .then((clothingItem) => this.setState({ viewClothing: clothingItem }, () => this.props.history.push({pathname: "/clothingDetails",  state: {viewClothing: this.state.viewClothing, parent: this.props.parent}})))
   };
 
   render() {

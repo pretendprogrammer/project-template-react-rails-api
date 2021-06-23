@@ -34,18 +34,29 @@ Clothing.create(name: "Brown Loafers", category: categories.sample, color: "Brow
 
 Clothing.create(name: "Purple Blouse", category: categories.sample, color: "Purple", brand: "Vince", size: sizes.sample, condition: conditions.sample, image_url: Faker::LoremFlickr.image, description: Faker::TvShows::Friends.quote, value: 40, user_id: jenna.id)
 
-Clothing.create(name: "Black Shirt", category: categories.sample, color: "Black", brand: "Gap", size: sizes.sample, condition: conditions.sample, image_url: Faker::LoremFlickr.image, description: Faker::TvShows::Friends.quote, value: 46, user_id: yosef.id)
+Clothing.create(name: "Green Scarf", category: categories.sample, color: "Green", brand: "Free People", size: sizes.sample, condition: conditions.sample, image_url: Faker::LoremFlickr.image, description: Faker::TvShows::Friends.quote, value: 30, user_id: jenna.id)
+
+Clothing.create(name: "Pink Dress", category: categories.sample, color: "Pink", brand: "Dress the Population", size: sizes.sample, condition: conditions.sample, image_url: Faker::LoremFlickr.image, description: Faker::TvShows::Friends.quote, value: 200, user_id: jenna.id)
+
+Clothing.create(name: "Blue Pants", category: categories.sample, color: "Blue", brand: "Denim 4ever", size: sizes.sample, condition: conditions.sample, image_url: Faker::LoremFlickr.image, description: Faker::TvShows::Friends.quote, value: 12, user_id: yosef.id)
+
+Clothing.create(name: "Silver Blazer", category: categories.sample, color: "Silver", brand: "Halston", size: sizes.sample, condition: conditions.sample, image_url: Faker::LoremFlickr.image, description: Faker::TvShows::Friends.quote, value: 210, user_id: yosef.id)
+
+Clothing.create(name: "Black Boots", category: categories.sample, color: "Black", brand: "Frye", size: sizes.sample, condition: conditions.sample, image_url: Faker::LoremFlickr.image, description: Faker::TvShows::Friends.quote, value: 150, user_id: jenna.id)
+
+Clothing.create(name: "Gold Watch", category: categories.sample, color: "Gold", brand: "Fossil", size: sizes.sample, condition: conditions.sample, image_url: Faker::LoremFlickr.image, description: Faker::TvShows::Friends.quote, value: 175, user_id: yosef.id)
 
 
 # 4.times do
 #     Swap.create(start: Faker::Time.between(from: DateTime.now, to: DateTime.now - 1), end: Faker::Time.between(from: DateTime.now + 1, to: DateTime.now + 2), name: Faker::Subscription.plan)
 # end
 
-Swap.create(start: "2021-06-23 12:30:59 -0700", end: "2021-06-23 17:30:59 -0700", name: "Swap 1")
-Swap.create(start: "2021-06-24 12:30:59 -0700", end: "2021-06-24 15:30:59 -0700", name: "Swap 2")
-Swap.create(start: "2021-06-25 08:30:59 -0700", end: "2021-06-25 12:30:59 -0700", name: "Swap 3")
-Swap.create(start: "2021-06-22 10:30:59 -0700", end: "2021-06-22 14:30:59 -0700", name: "Swap 4")
-Swap.create(start: "2021-06-26 14:30:59 -0700", end: "2021-06-26 17:30:59 -0700", name: "Swap 5")
+Swap.create(start: "2021-06-23 12:30:59 -0400", end: "2021-06-23 17:30:59 -0400", name: "Swap 1")
+Swap.create(start: "2021-06-24 12:30:59 -0400", end: "2021-06-24 15:30:59 -0400", name: "Swap 2")
+Swap.create(start: "2021-06-25 08:30:59 -0400", end: "2021-06-25 12:30:59 -0400", name: "Swap 3")
+Swap.create(start: "2021-06-22 10:30:59 -0400", end: "2021-06-22 14:30:59 -0400", name: "Swap 4")
+Swap.create(start: "2021-06-26 14:30:59 -0400", end: "2021-06-26 17:30:59 -0400", name: "Swap 5")
+Swap.create(start: "2021-06-23 16:15:59 -0400", end: "2021-06-23 18:30:59 -0400", name: "Swap 6")
 
 
 # 15.times do

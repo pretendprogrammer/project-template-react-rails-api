@@ -12,6 +12,7 @@ class App extends Component {
     super();
     this.state = {
       currentUser: {},
+      currentUserSwaps: [],
       allUsers: [],
       clothings: [],
       allUsers: [],
@@ -65,7 +66,7 @@ class App extends Component {
           this.setState({ currentUser: userInfo.user });
           localStorage.token = userInfo.jwt;
           this.getAllUsers()
-          // this.getUserClothing(this.state.currentUser.id);
+          this.getCurrentUserSwaps();
           history.push("/home");
         }
       });
@@ -141,6 +142,18 @@ class App extends Component {
     })
   }
 
+  getCurrentUserSwaps = () => {
+    fetch(`http://localhost:3000/current_swap_users?currentUserId=${this.state.currentUser.id}`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${localStorage.token}` },
+    })
+      .then(res => res.json())
+      .then(currentSwapUsers => {
+        let currentUserSwapsArray = currentSwapUsers.map(swapUser => swapUser.swap)
+        this.setState({currentUserSwaps: currentUserSwapsArray})
+      })
+  }
+
   render() {
     let friendsArray = this.state.allUsers.filter(
       (user) => user.id !== this.state.currentUser.id
@@ -171,6 +184,8 @@ class App extends Component {
                 friends={friendsArray}
                 getUserClothing={this.getUserClothing}
                 passSwapInfo={this.passSwapInfo}
+                currentUserSwaps={this.state.currentUserSwaps}
+                currentSwap={this.state.currentSwap}
               />
             )}
           />
@@ -197,12 +212,12 @@ class App extends Component {
           <Route
             exact
             path="/swapCloset"
-            render={(routerProps) => <SwapClosetContainer clothings={this.state.clothings} getUserClothing={this.getUserClothing} currentUser={this.state.currentUser} routerProps={routerProps} currentSwap={this.state.currentSwap}/>}
+            render={(routerProps) => <SwapClosetContainer clothings={this.state.clothings} getUserClothing={this.getUserClothing} currentUser={this.state.currentUser} routerProps={routerProps} currentSwap={this.state.currentSwap} getCurrentUserSwaps={this.getCurrentUserSwaps}/>}
           />
           <Route
           exact
           path="/clothingDetails"
-          render={(routerProps) => <ClothingDetailsComponent routerProps={routerProps}/>}
+          render={(routerProps) => <ClothingDetailsComponent routerProps={routerProps} currentUser={this.state.currentUser} currentClosetUser={this.state.currentClosetUser}/>}
           />
         </div>
       </Router>

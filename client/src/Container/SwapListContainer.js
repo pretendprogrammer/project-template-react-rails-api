@@ -8,10 +8,10 @@ class SwapListContainer extends Component {
   };
 
   componentDidMount() {
-    this.getUsersSwaps()
+    this.getAllSwaps()
   }
 
-  getUsersSwaps = () => {
+  getAllSwaps = () => {
     fetch("http://localhost:3000/swaps", {
       method: "GET",
       headers: { Authorization: `Bearer ${localStorage.token}` },
@@ -28,11 +28,13 @@ class SwapListContainer extends Component {
   }
 
   render() {
-    let optimizedJoinedSwaps = this.props.currentUser.swaps.map((swap) => ({
+    // does not work (only updates the joined swaps after logging back in, because currentUser object is only updated on log-in)
+    // need to fetch swaps for current user 
+    let optimizedJoinedSwaps = this.props.currentUserSwaps.map((swap) => ({
       ...swap,
       start: new Date(swap.start),
       end: new Date(swap.end),
-    }));
+    }))
 
     let futureJoinedSwaps = optimizedJoinedSwaps.filter(swap => swap.end > new Date())
 
@@ -50,9 +52,9 @@ class SwapListContainer extends Component {
     return (
       <div>
         {futureJoinedSwaps.map((swap) => (
-          <SwapsJoinedComponent swap={swap} key={swap.id} passSwapInfo={this.props.passSwapInfo} getUsersSwaps={this.getUsersSwaps} {...this.props.routerProps}/>
+          <SwapsJoinedComponent swap={swap} key={swap.id} passSwapInfo={this.props.passSwapInfo} getUsersSwaps={this.getAllSwaps} {...this.props.routerProps} />
         ))}
-        {filteredUnjoinedSwaps.map(swap => <SwapsAvailableComponent {...this.props.routerProps} swap={swap} key={swap.id} passSwapInfo={this.props.passSwapInfo}/>)}
+        {filteredUnjoinedSwaps.map(swap => <SwapsAvailableComponent {...this.props.routerProps} swap={swap} key={swap.id} passSwapInfo={this.props.passSwapInfo} />)}
       </div>
     );
   }

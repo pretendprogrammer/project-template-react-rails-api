@@ -22,6 +22,8 @@ class HomePageContainer extends Component {
           currentUser={this.props.currentUser}
           routerProps={this.props.routerProps}
           passSwapInfo={this.props.passSwapInfo}
+          currentUserSwaps={this.props.currentUserSwaps}
+          currentSwap={this.props.currentSwap}
         />
         <button
           onClick={() =>

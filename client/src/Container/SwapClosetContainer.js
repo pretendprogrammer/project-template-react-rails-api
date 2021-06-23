@@ -57,7 +57,7 @@ class SwapClosetContainer extends Component {
       .then(result => console.log(result))
   }
 
-  createSwapUser = () => {
+  createSwapUser = async () => {
     let postConfig = {
       method: "POST",
       headers: {
@@ -79,14 +79,10 @@ class SwapClosetContainer extends Component {
         <button onClick={() => {
           this.createSwapClothings()
           this.updateClothings()
-          this.createSwapUser()
+          this.createSwapUser().then(() => {this.props.getCurrentUserSwaps(this.props.currentSwap.id)})
+          // this.props.getCurrentUserSwaps(this.props.currentSwap.id)
           this.props.routerProps.history.push('/home')
         }}
-        // Three separate fetches, each passes the full array to the backend:
-        // create a swapClothing for each clothing item in array with prev_owner_id (POST/CREATE SwapClothing)
-        // remove userId from clothing (UPDATE clothing)
-        // create a swapUser for the user and the swap with credits (POST/CREATE SwapUser)
-        // push back to home page
         >Submit</button>
       </div>
     );

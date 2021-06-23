@@ -11,12 +11,20 @@ class ClothingDetailsComponent extends Component {
         <p>{viewClothing.description}</p>
         <p>Brand: {viewClothing.brand}</p>
         <p>Size: {viewClothing.size}</p>
+        <p>Category: {viewClothing.category}</p>
         <p>Condition: {viewClothing.condition}</p>
         <p>Color: {viewClothing.color}</p>
         <p>Value: {viewClothing.value}</p>
+        {this.props.currentClosetUser.id === this.props.currentUser.id
+        ?
         <button onClick={() => viewClothing.handleDeleteClothing(viewClothing.id)}>
           Delete this piece
         </button>
+        : null
+        }
+        <button
+        onClick={() => this.props.routerProps.history.push("/closet")}
+        >Back to Closet</button>
       </div>
     );
   }

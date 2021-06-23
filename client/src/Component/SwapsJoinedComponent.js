@@ -18,7 +18,7 @@ class SwapsJoinedComponent extends Component {
         {this.props.swap.start <= new Date()
           ? <button onClick={() => {
             this.props.passSwapInfo(this.props.swap)
-            this.props.getUsersSwaps()
+            this.props.getAllSwaps()
             this.props.history.push("/swap")
             }}>Enter Swap</button>
         : null}
