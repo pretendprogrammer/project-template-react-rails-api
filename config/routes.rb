@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   
   resources :clothings, only: [:destroy, :show, :create, :update]
+  patch '/remove_user_ids', to: 'clothings#remove_user_ids'
   post '/get_clothings', to: 'clothings#index_user_clothings'
   # get '/get_clothings', to: 'clothings#index_user_clothings'
   resources :swap_clothings, only: [:create]
   resources :swap_users, only: [:create]
-  resources :swaps, only: [:index]
+  resources :swaps, only: [:index, :show]
   resources :users, only: [:create, :index, :show]
   # resources :usernames
 

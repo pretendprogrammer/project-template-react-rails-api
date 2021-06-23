@@ -5,18 +5,19 @@ class SwapsAvailableComponent extends Component {
   render() {
     return (
       <div>
-        {this.props.name}:{" "}
-        {this.props.start.toLocaleString("en-US", {
+        {this.props.swap.name}:{" "}
+        {this.props.swap.start.toLocaleString("en-US", {
           // timeZone: "EST",
           timeStyle: "short",
           dateStyle: "medium",
         })}{" "}
         -{" "}
-        {this.props.end.toLocaleString("en-US", {
+        {this.props.swap.end.toLocaleString("en-US", {
           timeStyle: "short",
           // timeZone: "EST",
         })}
         <button onClick={() => {
+          this.props.passSwapInfo(this.props.swap)
           this.props.history.push("/swapCloset")
         }}
         >Join Swap</button>

@@ -7,7 +7,7 @@ class SwapListContainer extends Component {
     allSwapsArray: [],
   };
 
-  componentDidMount() {
+  getUsersSwaps = () => {
     fetch("http://localhost:3000/swaps", {
       method: "GET",
       headers: { Authorization: `Bearer ${localStorage.token}` },
@@ -41,12 +41,14 @@ class SwapListContainer extends Component {
 
     let filteredUnjoinedSwaps = unjoinedSwaps.filter(swap => swap.start > new Date())
 
+    this.getUsersSwaps()
+
     return (
       <div>
         {futureJoinedSwaps.map((swap) => (
-          <SwapsJoinedComponent {...swap} key={swap.id} />
+          <SwapsJoinedComponent swap={swap} key={swap.id} passSwapInfo={this.props.passSwapInfo} getUsersSwaps={this.getUsersSwaps} {...this.props.routerProps}/>
         ))}
-        {filteredUnjoinedSwaps.map(swap => <SwapsAvailableComponent {...this.props.routerProps} {...swap} key={swap.id}/>)}
+        {filteredUnjoinedSwaps.map(swap => <SwapsAvailableComponent {...this.props.routerProps} swap={swap} key={swap.id} passSwapInfo={this.props.passSwapInfo}/>)}
       </div>
     );
   }

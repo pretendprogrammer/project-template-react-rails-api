@@ -3,11 +3,19 @@ import ClothingDetailsComponent from "../Component/ClothingDetailsComponent";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class ClothingComponent extends Component {
-  state = { viewClothing: {} };
+  state = { 
+    viewClothing: {},
+    swapped: ""
+  };
 
   toggleDetails = () => {
     this.setState({ seeDetails: !this.state.seeDetails });
   };
+
+  swapped = () => {
+    let exists = this.props.clothingsToSwap.find(clothing => clothing.id === this.props.clothing.id)
+    return exists ? true : false
+  }
 
   getIndividualClothing = (clothingId) => {
     fetch(`http://localhost:3000/clothings/${clothingId}`, {
@@ -54,10 +62,13 @@ class ClothingComponent extends Component {
                   </button>
                 : this.props.parent === "swapClosetClothingContainer"
                 ? <button
-                // push clothing object to array of clothes to be swapped
-                // change button name to Remove from Swap
-                // Remove button removes from array
-                >Add to Swap</button>
+                    onClick={() => this.props.toggleInclusionToSwap(this.props.clothing)}
+                >{this.swapped() ? 'Remove From Swap' : 'Add to Swap'}</button>
+                : this.props.parent === "swapClothingContainer" 
+                ? <button
+                // updates clothing to have user's id
+                // removes 1 from credits
+                >Take</button>
                 : null}
 
               </div>

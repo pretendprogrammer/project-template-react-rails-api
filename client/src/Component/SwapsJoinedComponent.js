@@ -4,18 +4,24 @@ class SwapsJoinedComponent extends Component {
   render() {
     return (
       <div>
-        {this.props.name}:{" "}
-        {this.props.start.toLocaleString("en-US", {
+        {this.props.swap.name}:{" "}
+        {this.props.swap.start.toLocaleString("en-US", {
           timeStyle: "short",
           dateStyle: "medium",
           // timeZone: "EST",
         })}{" "}
         -{" "}
-        {this.props.end.toLocaleString("en-US", {
+        {this.props.swap.end.toLocaleString("en-US", {
           timeStyle: "short",
           // timeZone: "EST",
         })}
-        <button>Enter Swap</button>
+        {this.props.swap.start <= new Date()
+          ? <button onClick={() => {
+            this.props.passSwapInfo(this.props.swap)
+            this.props.getUsersSwaps()
+            this.props.history.push("/swap")
+            }}>Enter Swap</button>
+        : null}
       </div>
     );
   }

@@ -15,7 +15,8 @@ class App extends Component {
       allUsers: [],
       clothings: [],
       allUsers: [],
-      currentClosetUser: {}
+      currentClosetUser: {},
+      currentSwap: {}
     };
   }
 
@@ -134,6 +135,12 @@ class App extends Component {
     })
   }
 
+  passSwapInfo = (swapObj) => {
+    this.setState({
+      currentSwap: swapObj
+    })
+  }
+
   render() {
     let friendsArray = this.state.allUsers.filter(
       (user) => user.id !== this.state.currentUser.id
@@ -163,13 +170,14 @@ class App extends Component {
                 handleLogout={this.handleLogout}
                 friends={friendsArray}
                 getUserClothing={this.getUserClothing}
+                passSwapInfo={this.passSwapInfo}
               />
             )}
           />
           <Route
             exact
             path="/swap"
-            render={(routerProps) => <SwapContainer />}
+            render={(routerProps) => <SwapContainer currentSwap={this.state.currentSwap} currentUser={this.state.currentUser} routerProps={routerProps}/>}
           />
           <Route
             exact
@@ -189,7 +197,7 @@ class App extends Component {
           <Route
             exact
             path="/swapCloset"
-            render={(routerProps) => <SwapClosetContainer clothings={this.state.clothings} getUserClothing={this.getUserClothing} currentUser={this.state.currentUser} routerProps={routerProps}/>}
+            render={(routerProps) => <SwapClosetContainer clothings={this.state.clothings} getUserClothing={this.getUserClothing} currentUser={this.state.currentUser} routerProps={routerProps} currentSwap={this.state.currentSwap}/>}
           />
         </div>
       </Router>
