@@ -2,17 +2,19 @@ import React, { Component } from "react";
 
 class ClothingDetailsComponent extends Component {
   render() {
+    console.log(this.props)
+    let viewClothing = this.props.routerProps.location.state.viewClothing
     return (
       <div>
-        {this.props.name}
-        <img src={this.props.image_url} alt={this.props.name} />
-        <p>{this.props.description}</p>
-        <p>Brand: {this.props.brand}</p>
-        <p>Size: {this.props.size}</p>
-        <p>Condition: {this.props.condition}</p>
-        <p>Color: {this.props.color}</p>
-        <p>Value: {this.props.value}</p>
-        <button onClick={() => this.props.handleDeleteClothing(this.props.id)}>
+        {viewClothing.name}
+        <img src={viewClothing.image_url} alt={viewClothing.name} />
+        <p>{viewClothing.description}</p>
+        <p>Brand: {viewClothing.brand}</p>
+        <p>Size: {viewClothing.size}</p>
+        <p>Condition: {viewClothing.condition}</p>
+        <p>Color: {viewClothing.color}</p>
+        <p>Value: {viewClothing.value}</p>
+        <button onClick={() => viewClothing.handleDeleteClothing(viewClothing.id)}>
           Delete this piece
         </button>
       </div>

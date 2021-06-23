@@ -26,55 +26,33 @@ class ClothingComponent extends Component {
       },
     })
       .then((res) => res.json())
-      .then((clothingItem) => this.setState({ viewClothing: clothingItem }));
+      .then((clothingItem) => this.setState({ viewClothing: clothingItem }, () => this.props.history.push({pathname: "/clothingDetails",  state: {viewClothing: this.state.viewClothing}})))
   };
 
   render() {
     return (
       <div>
-        <Switch>
-          <Route
-            exact
-            path={`${this.props.match.url}/:clothingId`}
-            render={(routerProps) =>
-              <ClothingDetailsComponent
-                {...this.state.viewClothing}
-                handleDeleteClothing={this.props.handleDeleteClothing}
-              />
-            }
-          />
-          <Route
-            path={this.props.match.path}
-            render={(routerProps) => (
-              <div>
-                <img src={this.props.clothing.image_url} alt={this.props.clothing.name} />
-                {this.props.clothing.name}
-                {this.props.parent === "clothingContainer" ?
-                  <button
-                  onClick={() => {
-                    this.getIndividualClothing(this.props.clothing.id);
-                    // this.props.history.push("/home") <- This works fine
-                    debugger
-                    this.props.history.push(`${this.props.match.url}/${this.props.clothing.id}`);
-                  }}
-                  >
-                    View Details
-                  </button>
-                : this.props.parent === "swapClosetClothingContainer"
-                ? <button
-                    onClick={() => this.props.toggleInclusionToSwap(this.props.clothing)}
-                >{this.swapped() ? 'Remove From Swap' : 'Add to Swap'}</button>
-                : this.props.parent === "swapClothingContainer" 
-                ? <button
-                // updates clothing to have user's id
-                // removes 1 from credits
-                >Take</button>
-                : null}
-
-              </div>
-            )}
-          />
-        </Switch>
+        <img src={this.props.clothing.image_url} alt={this.props.clothing.name} />
+        {this.props.clothing.name}
+        {this.props.parent === "clothingContainer" ?
+          <button
+          onClick={() => {
+            console.log(this.props.clothing.id)
+            this.getIndividualClothing(this.props.clothing.id);
+          }}
+          > 
+            View Details
+          </button>
+        : this.props.parent === "swapClosetClothingContainer"
+        ? <button
+            onClick={() => this.props.toggleInclusionToSwap(this.props.clothing)}
+        >{this.swapped() ? 'Remove From Swap' : 'Add to Swap'}</button>
+        : this.props.parent === "swapClothingContainer" 
+        ? <button
+        // updates clothing to have user's id
+        // removes 1 from credits
+        >Take</button>
+        : null}
       </div>
     );
   }

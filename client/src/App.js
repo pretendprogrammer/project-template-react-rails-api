@@ -199,6 +199,11 @@ class App extends Component {
             path="/swapCloset"
             render={(routerProps) => <SwapClosetContainer clothings={this.state.clothings} getUserClothing={this.getUserClothing} currentUser={this.state.currentUser} routerProps={routerProps} currentSwap={this.state.currentSwap}/>}
           />
+          <Route
+          exact
+          path="/clothingDetails"
+          render={(routerProps) => <ClothingDetailsComponent routerProps={routerProps}/>}
+          />
         </div>
       </Router>
     );

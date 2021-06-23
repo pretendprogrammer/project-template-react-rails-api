@@ -7,6 +7,10 @@ class SwapListContainer extends Component {
     allSwapsArray: [],
   };
 
+  componentDidMount() {
+    this.getUsersSwaps()
+  }
+
   getUsersSwaps = () => {
     fetch("http://localhost:3000/swaps", {
       method: "GET",
@@ -41,7 +45,7 @@ class SwapListContainer extends Component {
 
     let filteredUnjoinedSwaps = unjoinedSwaps.filter(swap => swap.start > new Date())
 
-    this.getUsersSwaps()
+    // this.getUsersSwaps()
 
     return (
       <div>
