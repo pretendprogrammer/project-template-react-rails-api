@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post '/get_clothings', to: 'clothings#index_user_clothings'
   # get '/get_clothings', to: 'clothings#index_user_clothings'
   resources :swap_clothings, only: [:create]
-  resources :swap_users, only: [:create]
+  resources :swap_users, only: [:create, :update]
   resources :swaps, only: [:index, :show]
   get '/current_swap_users', to: 'swap_users#current_swap_users'
   resources :users, only: [:create, :index, :show]

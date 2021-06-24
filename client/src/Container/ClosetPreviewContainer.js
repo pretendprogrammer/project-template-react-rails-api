@@ -3,9 +3,11 @@ import ClothingComponent from "../Component/ClothingComponent";
 
 class ClosetPreviewContainer extends Component {
 
-  componentDidMount() {
-    this.props.getUserClothing(this.props.currentUser)
-  }
+  // componentDidMount() {
+  //   if(this.props.currentUser.id) {
+  //     this.props.getUserClothing(this.props.currentUser)
+  //   }
+  // }
 
   render() {
     return (

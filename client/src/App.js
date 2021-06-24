@@ -67,9 +67,10 @@ class App extends Component {
           localStorage.token = userInfo.jwt;
           this.getAllUsers()
           this.getCurrentUserSwaps();
-          history.push("/home");
+          this.getUserClothing(userInfo.user)
         }
-      });
+      })
+      .then(() => history.push("/home"))
   };
 
   handleLogout = (history) => {
@@ -111,11 +112,13 @@ class App extends Component {
       }),
     })
       .then((res) => res.json())
-      .then((clothingsArray) =>
+      .then((clothingsArray) => {
         this.setState({
           clothings: clothingsArray,
           currentClosetUser: userObj
         })
+        console.log("getUserClothing run")
+      }
       );
   };
 

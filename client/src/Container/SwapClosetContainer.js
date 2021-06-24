@@ -10,9 +10,9 @@ class SwapClosetContainer extends Component {
     }
   }
 
-  componentDidMount() {
-    this.props.getUserClothing(this.props.currentUser)
-  }
+  // componentDidMount() {
+  //   this.props.getUserClothing(this.props.currentUser)
+  // }
 
   toggleInclusionToSwap = (clothingObj) => {
     let exists = this.state.clothingsToSwap.find(clothing => clothing.id === clothingObj.id)
@@ -43,7 +43,7 @@ class SwapClosetContainer extends Component {
 
   }
   
-  updateClothings = () => {
+  updateClothings = async () => {
     let patchConfig = {
       method: "PATCH",
       headers: {
@@ -78,8 +78,8 @@ class SwapClosetContainer extends Component {
         <SwapClosetClothingContainer clothings={this.props.clothings} routerProps={this.props.routerProps} toggleInclusionToSwap={this.toggleInclusionToSwap} clothingsToSwap={this.state.clothingsToSwap}/>
         <button onClick={() => {
           this.createSwapClothings()
-          this.updateClothings()
-          this.createSwapUser().then(() => {this.props.getCurrentUserSwaps(this.props.currentSwap.id)})
+          this.updateClothings().then(() => this.props.getUserClothing(this.props.currentUser))
+          this.createSwapUser().then(() => this.props.getCurrentUserSwaps(this.props.currentSwap.id))
           // this.props.getCurrentUserSwaps(this.props.currentSwap.id)
           this.props.routerProps.history.push('/home')
         }}

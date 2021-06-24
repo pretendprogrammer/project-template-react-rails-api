@@ -4,15 +4,14 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class ClothingComponent extends Component {
   state = { 
-    viewClothing: {},
-    swapped: ""
+    viewClothing: {}
   };
 
   toggleDetails = () => {
     this.setState({ seeDetails: !this.state.seeDetails });
   };
 
-  swapped = () => {
+  checkIfInSwap = () => {
     let exists = this.props.clothingsToSwap.find(clothing => clothing.id === this.props.clothing.id)
     return exists ? true : false
   }
@@ -34,8 +33,8 @@ class ClothingComponent extends Component {
       <div>
         <img src={this.props.clothing.image_url} alt={this.props.clothing.name} />
         {this.props.clothing.name}
-        {this.props.parent === "clothingContainer" ?
-          <button
+        {(this.props.parent === "clothingContainer" || this.props.parent === "swapClothingContainer")
+        ? <button
           onClick={() => {
             console.log(this.props.clothing.id)
             this.getIndividualClothing(this.props.clothing.id);
@@ -43,14 +42,21 @@ class ClothingComponent extends Component {
           > 
             View Details
           </button>
-        : this.props.parent === "swapClosetClothingContainer"
+        : null} 
+
+        {this.props.parent === "swapClosetClothingContainer"
         ? <button
             onClick={() => this.props.toggleInclusionToSwap(this.props.clothing)}
-        >{this.swapped() ? 'Remove From Swap' : 'Add to Swap'}</button>
-        : this.props.parent === "swapClothingContainer" 
+        >{this.checkIfInSwap() ? 'Remove From Swap' : 'Add to Swap'}</button>
+        : null} 
+
+        {this.props.parent === "swapClothingContainer" 
         ? <button
         // updates clothing to have user's id
-        // removes 1 from credits
+        onClick={() => {
+          this.props.reduceCredits()
+          console.log('invoked')
+        }}
         >Take</button>
         : null}
       </div>

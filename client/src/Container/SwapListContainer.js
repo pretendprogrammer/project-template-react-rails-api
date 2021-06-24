@@ -28,8 +28,6 @@ class SwapListContainer extends Component {
   }
 
   render() {
-    // does not work (only updates the joined swaps after logging back in, because currentUser object is only updated on log-in)
-    // need to fetch swaps for current user 
     let optimizedJoinedSwaps = this.props.currentUserSwaps.map((swap) => ({
       ...swap,
       start: new Date(swap.start),
@@ -52,7 +50,7 @@ class SwapListContainer extends Component {
     return (
       <div>
         {futureJoinedSwaps.map((swap) => (
-          <SwapsJoinedComponent swap={swap} key={swap.id} passSwapInfo={this.props.passSwapInfo} getUsersSwaps={this.getAllSwaps} {...this.props.routerProps} />
+          <SwapsJoinedComponent swap={swap} key={swap.id} passSwapInfo={this.props.passSwapInfo} getAllSwaps={this.getAllSwaps} {...this.props.routerProps} />
         ))}
         {filteredUnjoinedSwaps.map(swap => <SwapsAvailableComponent {...this.props.routerProps} swap={swap} key={swap.id} passSwapInfo={this.props.passSwapInfo} />)}
       </div>

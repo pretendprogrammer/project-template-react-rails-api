@@ -23,16 +23,18 @@ before_action :find_clothing, only: [:show, :destroy, :update]
     end
 
     def remove_user_ids
+        updated_clothing_array = []
         params[:array].each do |clothing|
             found_clothing = Clothing.find(clothing[:id])
             found_clothing.update!(user_id: nil)
+            updated_clothing_array << found_clothing
         end
-        render json: {message: "Clothing successfully updated"}, status: :accepted
+        render json: {result: updated_clothing_array, message: "Clothing successfully updated"}, status: :accepted
     end
     
 
     def index_user_clothings
-        user_clothings = Clothing.where(user_id: params[:user_id])
+        user_clothings = Clothing.where({user_id: params[:user_id]})
         render json: user_clothings, each_serializer: ClothingsIndexSerializer
     end
 

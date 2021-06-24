@@ -5,7 +5,8 @@ class SwapperListContainer extends Component {
   render() {
     return (
       <div>
-        {/* {this.props.swappers.map(swapper => {<SwapperComponent swapper={swapper} key={swapper.id} />})} */}
+        <h4>Participating Swappers</h4>
+        {this.props.swappers.map(swapper => <SwapperComponent swapper={swapper} key={swapper.id} />)}
       </div>
     );
   }

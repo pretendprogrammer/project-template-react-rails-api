@@ -23,8 +23,8 @@ class ClothingDetailsComponent extends Component {
         : null
         }
         <button
-        onClick={() => this.props.routerProps.history.push("/closet")}
-        >Back to Closet</button>
+        onClick={() => this.props.routerProps.history.goBack()}
+        >Go Back</button>
       </div>
     );
   }

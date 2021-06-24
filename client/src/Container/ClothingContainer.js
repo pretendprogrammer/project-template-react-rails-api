@@ -3,6 +3,10 @@ import ClothingComponent from "../Component/ClothingComponent";
 
 class ClothingContainer extends Component {
 
+  componentDidMount() {
+    this.props.getUserClothing()
+  }
+
   render() {
     return (
       <div>

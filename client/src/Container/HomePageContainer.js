@@ -16,7 +16,7 @@ class HomePageContainer extends Component {
           getUserClothing={this.props.getUserClothing}
         />
         <FriendListContainer friends={this.props.friends} getUserClothing={this.props.getUserClothing} routerProps={this.props.routerProps}
- />
+        />
         <SwapListContainer
           userSwaps={this.props.currentUser.swaps}
           currentUser={this.props.currentUser}

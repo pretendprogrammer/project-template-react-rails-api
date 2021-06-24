@@ -52,7 +52,7 @@ class RegisterFormComponent extends Component {
           <label htmlFor="spiritColor">Spirit Color</label>
           <input
             onChange={(event) => this.setState({spirit_color: event.target.value})}
-            type="text"
+            type="color"
             id="spiritColor"
             name="spiritColor"
             value={this.state.spirit_color}
