@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   patch '/remove_user_ids', to: 'clothings#remove_user_ids'
   post '/get_clothings', to: 'clothings#index_user_clothings'
   # get '/get_clothings', to: 'clothings#index_user_clothings'
-  resources :swap_clothings, only: [:create]
+  resources :swap_clothings, only: [:create, :destroy]
   resources :swap_users, only: [:create, :update]
   resources :swaps, only: [:index, :show]
   get '/current_swap_users', to: 'swap_users#current_swap_users'

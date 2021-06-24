@@ -12,6 +12,7 @@ class App extends Component {
     super();
     this.state = {
       currentUser: {},
+      // instances of UserSwap model
       currentUserSwaps: [],
       allUsers: [],
       clothings: [],
@@ -195,7 +196,7 @@ class App extends Component {
           <Route
             exact
             path="/swap"
-            render={(routerProps) => <SwapContainer currentSwap={this.state.currentSwap} currentUser={this.state.currentUser} routerProps={routerProps}/>}
+            render={(routerProps) => <SwapContainer currentSwap={this.state.currentSwap} currentUser={this.state.currentUser} routerProps={routerProps} getUserClothing={this.getUserClothing}/>}
           />
           <Route
             exact

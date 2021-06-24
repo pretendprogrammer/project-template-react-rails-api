@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import ClothingComponent from "../Component/ClothingComponent";
 
-class ClothingContainer extends Component {
+class SwapClosetClothingContainer extends Component {
+
+  componentDidMount() {
+    this.props.getUserClothing(this.props.currentUser)
+  }
+  
   render() {
     return (
       <div>
@@ -16,4 +21,4 @@ class ClothingContainer extends Component {
   }
 }
 
-export default ClothingContainer;
+export default SwapClosetClothingContainer;

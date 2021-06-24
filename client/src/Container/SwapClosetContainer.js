@@ -10,10 +10,6 @@ class SwapClosetContainer extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   this.props.getUserClothing(this.props.currentUser)
-  // }
-
   toggleInclusionToSwap = (clothingObj) => {
     let exists = this.state.clothingsToSwap.find(clothing => clothing.id === clothingObj.id)
     if(exists){
@@ -75,10 +71,11 @@ class SwapClosetContainer extends Component {
     return (
       <div>
         <h1>Swap Your Clothes</h1>
-        <SwapClosetClothingContainer clothings={this.props.clothings} routerProps={this.props.routerProps} toggleInclusionToSwap={this.toggleInclusionToSwap} clothingsToSwap={this.state.clothingsToSwap}/>
+        <SwapClosetClothingContainer clothings={this.props.clothings} routerProps={this.props.routerProps} toggleInclusionToSwap={this.toggleInclusionToSwap} clothingsToSwap={this.state.clothingsToSwap} getUserClothing={this.props.getUserClothing} currentUser={this.props.currentUser}/>
         <button onClick={() => {
           this.createSwapClothings()
-          this.updateClothings().then(() => this.props.getUserClothing(this.props.currentUser))
+          this.updateClothings()
+          // .then(() => this.props.getUserClothing(this.props.currentUser))
           this.createSwapUser().then(() => this.props.getCurrentUserSwaps(this.props.currentSwap.id))
           // this.props.getCurrentUserSwaps(this.props.currentSwap.id)
           this.props.routerProps.history.push('/home')

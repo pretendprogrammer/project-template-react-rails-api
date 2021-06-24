@@ -16,8 +16,36 @@ class SwapContainer extends Component {
     }
   }
 
+  takeClothing = (clothingId) => {
+    let swapClothingId = this.state.swapClothings.find(swapClothing => swapClothing.clothing_id === clothingId).id
+    let deleteConfig = {
+      method: 'DELETE',
+      headers: {Authorization: `Bearer ${localStorage.token}`}
+    }
+    fetch(`http://localhost:3000/swap_clothings/${swapClothingId}`, deleteConfig)
+      .then(res => res.json())
+      .then(deletedClothing => {
+        if(!deletedClothing.error) {
+          let patchConfig = {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.token}`
+            },
+            body: JSON.stringify({user_id: this.props.currentUser.id})
+          }
+          fetch(`http://localhost:3000/clothings/${clothingId}`, patchConfig)
+            .then(res => res.json())
+            .then(updatedClothingObj => {
+              let filteredArray = this.state.clothings.filter(clothing => clothing.id !== updatedClothingObj.id)
+              this.setState({clothings: filteredArray})
+            })
+        }
+      })
+  }
+
   reduceCredits = () => {
-    if(this.state.currentSwapUser.credits > 0) {
+    if (this.state.currentSwapUser.credits > 0) {
       let patchConfig = {
         method: "PATCH",
         headers: {
@@ -37,6 +65,7 @@ class SwapContainer extends Component {
   }
 
   componentDidMount() {
+    console.log('line 69')
     fetch(`http://localhost:3000/swaps/${this.props.currentSwap.id}`, {
       method: "GET",
       headers: {
@@ -64,8 +93,13 @@ class SwapContainer extends Component {
       <div>
         <h1>Clothing Swap</h1>
         <h5>Credits: {this.state.currentSwapUser.credits}</h5>
-        <SwapClothingContainer credits={this.state.currentSwapUser.credits} reduceCredits={this.reduceCredits} clothings={this.state.clothings} routerProps={this.props.routerProps}/>
+        <SwapClothingContainer takeClothing={this.takeClothing} credits={this.state.currentSwapUser.credits} reduceCredits={this.reduceCredits} clothings={this.state.clothings} routerProps={this.props.routerProps} getUserClothing={this.props.getUserClothing} currentUser={this.props.currentUser}/>
         <SwapperListContainer swappers={this.state.swappers}/>
+        <button
+        onClick={() => {
+          this.props.routerProps.history.push("/home")
+        }}
+        >Leave Swap</button>
       </div>
     );
   }

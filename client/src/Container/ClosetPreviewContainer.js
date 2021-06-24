@@ -3,11 +3,13 @@ import ClothingComponent from "../Component/ClothingComponent";
 
 class ClosetPreviewContainer extends Component {
 
-  // componentDidMount() {
-  //   if(this.props.currentUser.id) {
-  //     this.props.getUserClothing(this.props.currentUser)
-  //   }
-  // }
+  // should comment this back in, and maybe add this same logic to every container that loads ClothingComponent
+
+  componentDidMount() {
+    if(this.props.currentUser.id) {
+      this.props.getUserClothing(this.props.currentUser)
+    }
+  }
 
   render() {
     return (

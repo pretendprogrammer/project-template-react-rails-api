@@ -14,6 +14,7 @@ class ClosetContainer extends Component {
           routerProps={this.props.routerProps}
           getUserClothing={this.props.getUserClothing}
           currentClosetUser={this.props.currentClosetUser}
+          getUserClothing={this.props.getUserClothing}
         />
         {(this.props.currentClosetUser.id === this.props.currentUser.id) 
         ? <AddClothingFormComponent currentUserId={this.props.currentUser.id} addClothing={this.props.addClothing} /> 

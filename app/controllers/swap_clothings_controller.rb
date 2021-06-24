@@ -1,4 +1,5 @@
 class SwapClothingsController < ApplicationController
+rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
     def create
         swap_id = params[:swap_id]
@@ -10,7 +11,17 @@ class SwapClothingsController < ApplicationController
             render json: { error: invalid.record.errors.full_messages }, status: :not_acceptable
     end
 
+    def destroy
+        swap_clothing = SwapClothing.find(params[:id])
+        swap_clothing.destroy!
+        render json: {message: "SwapClothing Destroyed"}, status: :accepted
+    end
+
     private
+
+    def not_found
+        render json: {error: "SwapClothing not found"}, status: :not_found
+    end
 
     def swap_clothing_params
         params.require(:array).permit(:id, :user_id)

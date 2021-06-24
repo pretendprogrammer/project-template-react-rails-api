@@ -54,6 +54,9 @@ class ClothingComponent extends Component {
         ? <button
         // updates clothing to have user's id
         onClick={() => {
+          if (this.props.credits > 0) {
+            this.props.takeClothing(this.props.clothing.id)
+          }
           this.props.reduceCredits()
           console.log('invoked')
         }}

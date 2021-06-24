@@ -12,7 +12,7 @@ class SwapListContainer extends Component {
   }
 
   getAllSwaps = () => {
-    fetch("http://localhost:3000/swaps", {
+    return fetch("http://localhost:3000/swaps", {
       method: "GET",
       headers: { Authorization: `Bearer ${localStorage.token}` },
     })
@@ -23,8 +23,9 @@ class SwapListContainer extends Component {
           start: new Date(swap.start),
           end: new Date(swap.end),
         }));
+        //  return optimizedArray
         this.setState({ allSwapsArray: optimizedArray });
-      });
+      })
   }
 
   render() {

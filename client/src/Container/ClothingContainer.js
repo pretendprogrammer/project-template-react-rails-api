@@ -3,8 +3,10 @@ import ClothingComponent from "../Component/ClothingComponent";
 
 class ClothingContainer extends Component {
 
+  // not passing an argument here!!!!
+  // should pass this.props.currentClosetUser
   componentDidMount() {
-    this.props.getUserClothing()
+    this.props.getUserClothing(this.props.currentClosetUser)
   }
 
   render() {
