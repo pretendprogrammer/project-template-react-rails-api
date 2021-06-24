@@ -56,6 +56,8 @@ class ClothingComponent extends Component {
         onClick={() => {
           if (this.props.credits > 0) {
             this.props.takeClothing(this.props.clothing.id)
+          } else {
+            alert("You don't have any credits left!")
           }
           this.props.reduceCredits()
           console.log('invoked')

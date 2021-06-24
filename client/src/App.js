@@ -190,6 +190,7 @@ class App extends Component {
                 passSwapInfo={this.passSwapInfo}
                 currentUserSwaps={this.state.currentUserSwaps}
                 currentSwap={this.state.currentSwap}
+                getCurrentUserSwaps={this.getCurrentUserSwaps}
               />
             )}
           />

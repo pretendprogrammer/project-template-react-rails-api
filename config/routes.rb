@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # get '/get_clothings', to: 'clothings#index_user_clothings'
   resources :swap_clothings, only: [:create, :destroy]
   resources :swap_users, only: [:create, :update]
-  resources :swaps, only: [:index, :show]
+  resources :swaps, only: [:index, :show, :create]
   get '/current_swap_users', to: 'swap_users#current_swap_users'
   resources :users, only: [:create, :index, :show]
   # resources :usernames

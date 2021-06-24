@@ -3,7 +3,7 @@ import ClothingComponent from "../Component/ClothingComponent";
 
 class ClosetPreviewContainer extends Component {
 
-  // should comment this back in, and maybe add this same logic to every container that loads ClothingComponent
+  // this only sometimes works??? clothes submitted to swap do not always disappear from closet preview post-submit
 
   componentDidMount() {
     if(this.props.currentUser.id) {
