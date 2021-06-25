@@ -1,13 +1,14 @@
 import React, { Component } from "react";
+import { Container, Header, Button, Card, Image } from 'semantic-ui-react'
 
 class ClothingDetailsComponent extends Component {
   render() {
     console.log(this.props)
     let viewClothing = this.props.routerProps.location.state.viewClothing
     return (
-      <div>
+      <Container>
         {viewClothing.name}
-        <img src={viewClothing.image_url} alt={viewClothing.name} />
+        <Image src={viewClothing.image_url} alt={viewClothing.name} />
         <p>{viewClothing.description}</p>
         <p>Brand: {viewClothing.brand}</p>
         <p>Size: {viewClothing.size}</p>
@@ -17,15 +18,15 @@ class ClothingDetailsComponent extends Component {
         <p>Value: {viewClothing.value}</p>
         {this.props.currentClosetUser.id === this.props.currentUser.id
         ?
-        <button onClick={() => viewClothing.handleDeleteClothing(viewClothing.id)}>
+        <Button onClick={() => viewClothing.handleDeleteClothing(viewClothing.id)}>
           Delete this piece
-        </button>
+        </Button>
         : null
         }
-        <button
+        <Button
         onClick={() => this.props.routerProps.history.goBack()}
-        >Go Back</button>
-      </div>
+        >Go Back</Button>
+      </Container>
     );
   }
 }

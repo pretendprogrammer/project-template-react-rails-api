@@ -5,16 +5,20 @@ task :monitor_swaps => :environment do
         puts 'checking...'
         Swap.all.each do |swap|
             if swap.end < Time.zone.now
-                # reassign id's back to users, delete swaps
-                byebug
+                # reassign clothing id's back to users, delete swap_clothings
+                swap.swap_clothings.each do |swap_clothing|
+                    swap_clothing.clothing.update!(user_id: swap_clothing.prev_owner_id)
+                    puts 'Clothing updated'
+                    swap_clothing.destroy
+                    puts 'Swap_clothing destroyed'
+                end
             end
         end
     end
-    check()
 
-    # loop do
-    #     sleep(3)
-    #     check()
-    # end
+    loop do
+        check()
+        sleep(2.minutes)
+    end
 
 end

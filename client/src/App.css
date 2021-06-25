@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,55 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+
+.ui.button.form-button {
+  background-color: #4682B4;
+}
+
+.ui.input.form-button.input-button {
+  background-color: #4682B4;
+}
+
+.centered-container{
+  text-align: center;
+}
+
+.ui.button.view-closet-button{
+  background-color: #4682B4;
+}
+
+.ui.cards.friend-card {
+  min-height: 20em;
+}
+
+.ui.card.image, .ui.cards.card.image {
+  object-fit: contain;
+
+}
+.ui.image.card-image {
+  object-fit: contain;
+}
+
+.content-margin{
+  margin: 3em;
+}
+
+#profile-header{
+  width: 100vw;
+  text-align: center;
+}
+
+.ui.cards.card-content-margin{
+  margin-bottom: 2em;
+  margin-top: 2em;
+}
+
+.ui.form.form-width{
+  width: 50vw;
+}
+
+.ui.input.submit-button {
+  width: 20px;
 }

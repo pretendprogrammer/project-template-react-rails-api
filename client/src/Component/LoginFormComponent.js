@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Container, Header, Button, Input, Form, Grid } from 'semantic-ui-react'
 
 class LoginFormComponent extends Component {
   constructor() {
@@ -11,27 +12,29 @@ class LoginFormComponent extends Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={event => {
+      <Container className="content-margin">
+        <Grid centered>
+        <Form className="form-width" onSubmit={event => {
           event.preventDefault()
           this.props.handleLogin(this.state, this.props.history)} }>
-          <label htmlFor="username">Username</label>
-          <input onChange={(event) => this.setState({username: event.target.value})}
+          <Form.Input onChange={(event) => this.setState({username: event.target.value})}
             type="text"
             id="username"
             name="username"
             value={this.state.username}
+            placeholder='Username'
           />
-          <label htmlFor="password">Password</label>
-          <input onChange={(event) => this.setState({password: event.target.value})}
+          <Form.Input onChange={(event) => this.setState({password: event.target.value})}
             type="password"
             id="password"
             name="password"
             value={this.state.password}
+            placeholder='Password'
           />
-          <input type="submit" value="Log In" />
-        </form>
-      </div>
+          <Form.Input textAlign="center" className="submit-button" type="submit" value="Log In" />
+        </Form>
+        </Grid>
+      </Container>
     );
   }
 }

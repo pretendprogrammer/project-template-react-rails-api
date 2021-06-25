@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import ClothingComponent from "../Component/ClothingComponent";
+import { Container, Header, Button, Card } from 'semantic-ui-react'
 
 class ClothingContainer extends Component {
 
-  // not passing an argument here!!!!
-  // should pass this.props.currentClosetUser
-  componentDidMount() {
-    this.props.getUserClothing(this.props.currentClosetUser)
-  }
+  // componentDidMount() {
+  //   console.log("clothing container")
+  //   this.props.getUserClothing(this.props.currentClosetUser)
+  // }
 
   render() {
     return (
-      <div>
+      <Card.Group>
         {this.props.clothings.map((clothing) => (
           <ClothingComponent
             parent={"clothingContainer"}
@@ -21,7 +21,7 @@ class ClothingContainer extends Component {
             {...this.props.routerProps}
           />
         ))}
-      </div>
+      </Card.Group>
     );
   }
 }

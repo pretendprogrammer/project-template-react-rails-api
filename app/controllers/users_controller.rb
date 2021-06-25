@@ -33,7 +33,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :not_found
     private
 
     def user_params
-        params.permit(:username, :password, :bio, :image_url, :spirit_color)
+        params.permit(:username, :password, :bio, :image_url, :spirit_color, :admin)
     end
 
     def user_login_params

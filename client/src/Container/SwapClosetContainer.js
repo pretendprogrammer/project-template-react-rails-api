@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SwapClosetClothingContainer from "./SwapClosetClothingContainer";
+import { Container, Header, Button, Card } from 'semantic-ui-react'
 
 class SwapClosetContainer extends Component {
 
@@ -50,7 +51,11 @@ class SwapClosetContainer extends Component {
     }
     fetch('http://localhost:3000/remove_user_ids', patchConfig)
       .then(res => res.json())
-      .then(result => console.log(result))
+      .then(result => {
+        console.log("update clothings function in swapclosetcontainer")
+        this.props.getUserClothing(this.props.currentUser)
+        console.log(result)
+      })
   }
 
   createSwapUser = async () => {
@@ -67,21 +72,27 @@ class SwapClosetContainer extends Component {
       .then(result => console.log(result))
   }
 
+  fullSubmitFunction = async () => {
+    this.createSwapClothings()
+    this.updateClothings()
+    this.createSwapUser().then(() => this.props.getCurrentUserSwaps(this.props.currentSwap.id))
+  }
+
   render() {
     return (
-      <div>
-        <h1>Swap Your Clothes</h1>
+      <Container className="centered-container content-margin">
+        <Header as='h1'>Swap Your Clothes</Header>
         <SwapClosetClothingContainer clothings={this.props.clothings} routerProps={this.props.routerProps} toggleInclusionToSwap={this.toggleInclusionToSwap} clothingsToSwap={this.state.clothingsToSwap} getUserClothing={this.props.getUserClothing} currentUser={this.props.currentUser}/>
-        <button onClick={() => {
-          this.createSwapClothings()
-          this.updateClothings()
+        <Button onClick={() => {
+          this.fullSubmitFunction().then(() => this.props.routerProps.history.push('/home'))
+          // this.createSwapClothings()
+          // this.updateClothings()
           // .then(() => this.props.getUserClothing(this.props.currentUser))
-          this.createSwapUser().then(() => this.props.getCurrentUserSwaps(this.props.currentSwap.id))
+          // this.createSwapUser().then(() => this.props.getCurrentUserSwaps(this.props.currentSwap.id))
           // this.props.getCurrentUserSwaps(this.props.currentSwap.id)
-          this.props.routerProps.history.push('/home')
         }}
-        >Submit</button>
-      </div>
+        >Submit</Button>
+      </Container>
     );
   }
 }

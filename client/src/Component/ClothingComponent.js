@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ClothingDetailsComponent from "../Component/ClothingDetailsComponent";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Container, Header, Button, Card, Image } from 'semantic-ui-react'
 
 class ClothingComponent extends Component {
   state = { 
@@ -30,28 +31,28 @@ class ClothingComponent extends Component {
 
   render() {
     return (
-      <div>
-        <img src={this.props.clothing.image_url} alt={this.props.clothing.name} />
+      <Card>
+        <Image src={this.props.clothing.image_url} alt={this.props.clothing.name} />
         {this.props.clothing.name}
         {(this.props.parent === "clothingContainer" || this.props.parent === "swapClothingContainer")
-        ? <button
+        ? <Button
           onClick={() => {
             console.log(this.props.clothing.id)
             this.getIndividualClothing(this.props.clothing.id);
           }}
           > 
             View Details
-          </button>
+          </Button>
         : null} 
 
         {this.props.parent === "swapClosetClothingContainer"
-        ? <button
+        ? <Button
             onClick={() => this.props.toggleInclusionToSwap(this.props.clothing)}
-        >{this.checkIfInSwap() ? 'Remove From Swap' : 'Add to Swap'}</button>
+        >{this.checkIfInSwap() ? 'Remove From Swap' : 'Add to Swap'}</Button>
         : null} 
 
         {this.props.parent === "swapClothingContainer" 
-        ? <button
+        ? <Button
         // updates clothing to have user's id
         onClick={() => {
           if (this.props.credits > 0) {
@@ -62,9 +63,9 @@ class ClothingComponent extends Component {
           this.props.reduceCredits()
           console.log('invoked')
         }}
-        >Take</button>
+        >Take</Button>
         : null}
-      </div>
+      </Card>
     );
   }
 }

@@ -6,6 +6,8 @@ import SwapContainer from "./Container/SwapContainer";
 import ClosetContainer from "./Container/ClosetContainer";
 import SwapClosetContainer from "./Container/SwapClosetContainer";
 import ClothingDetailsComponent from "./Component/ClothingDetailsComponent";
+import { Container, Header, Button, Card } from 'semantic-ui-react'
+import './App.css'
 
 class App extends Component {
   constructor() {
@@ -71,7 +73,11 @@ class App extends Component {
           this.getUserClothing(userInfo.user)
         }
       })
-      .then(() => history.push("/home"))
+      .then(() => {
+        if(this.state.currentUser.id){
+        history.push("/home")
+        }
+      })
   };
 
   handleLogout = (history) => {
@@ -114,6 +120,7 @@ class App extends Component {
     })
       .then((res) => res.json())
       .then((clothingsArray) => {
+        console.log(clothingsArray)
         this.setState({
           clothings: clothingsArray,
           currentClosetUser: userObj
@@ -153,6 +160,7 @@ class App extends Component {
     })
       .then(res => res.json())
       .then(currentSwapUsers => {
+        console.log("end of getCurrentUserSwaps")
         let currentUserSwapsArray = currentSwapUsers.map(swapUser => swapUser.swap)
         this.setState({currentUserSwaps: currentUserSwapsArray})
       })
@@ -164,7 +172,7 @@ class App extends Component {
     );
     return (
       <Router>
-        <div>
+        <Container>
           <Route
             exact
             path="/"
@@ -191,6 +199,7 @@ class App extends Component {
                 currentUserSwaps={this.state.currentUserSwaps}
                 currentSwap={this.state.currentSwap}
                 getCurrentUserSwaps={this.getCurrentUserSwaps}
+                currentClosetUser={this.state.currentClosetUser}
               />
             )}
           />
@@ -224,7 +233,7 @@ class App extends Component {
           path="/clothingDetails"
           render={(routerProps) => <ClothingDetailsComponent routerProps={routerProps} currentUser={this.state.currentUser} currentClosetUser={this.state.currentClosetUser}/>}
           />
-        </div>
+        </Container>
       </Router>
     );
   }

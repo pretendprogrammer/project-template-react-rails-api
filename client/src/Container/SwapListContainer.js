@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SwapsAvailableComponent from "../Component/SwapsAvailableComponent";
 import SwapsJoinedComponent from "../Component/SwapsJoinedComponent";
 import CreateSwapsFormComponent from '../Component/CreateSwapsFormComponent'
+import { Container, Header, Button, Card } from 'semantic-ui-react'
 
 class SwapListContainer extends Component {
   state = {
@@ -10,6 +11,7 @@ class SwapListContainer extends Component {
 
   componentDidMount() {
     this.getAllSwaps()
+    this.props.getCurrentUserSwaps()
   }
 
   getAllSwaps = () => {
@@ -19,6 +21,7 @@ class SwapListContainer extends Component {
     })
       .then((res) => res.json())
       .then((result) => {
+        console.log(result)
         let optimizedArray = result.map((swap) => ({
           ...swap,
           start: new Date(swap.start),
@@ -50,16 +53,21 @@ class SwapListContainer extends Component {
     // this.getUsersSwaps()
 
     return (
-      <div>
+      <Container className="centered-container content-margin">
+        {futureJoinedSwaps.length > 0
+        ? <Header as="h2">Participating Swaps</Header>
+        : null}
         {futureJoinedSwaps.map((swap) => (
           <SwapsJoinedComponent swap={swap} key={swap.id} passSwapInfo={this.props.passSwapInfo} getAllSwaps={this.getAllSwaps} {...this.props.routerProps} />
         ))}
-        {filteredUnjoinedSwaps.map(swap => <SwapsAvailableComponent {...this.props.routerProps} swap={swap} key={swap.id} passSwapInfo={this.props.passSwapInfo} />)}
-        <CreateSwapsFormComponent getAllSwaps={this.getAllSwaps}/>
-        {/* {this.props.currentUser.admin 
-        ? <CreateSwapsFormComponent />
-        : null} */}
-      </div>
+        {filteredUnjoinedSwaps.length > 0
+        ? <Header as="h2">Swaps Available to Join</Header>
+        : null}
+        {filteredUnjoinedSwaps.map(swap => <SwapsAvailableComponent {...this.props.routerProps} swap={swap} key={swap.id} passSwapInfo={this.props.passSwapInfo} getAllSwaps={this.getAllSwaps}/>)}
+        {this.props.currentUser.admin 
+        ? <CreateSwapsFormComponent getAllSwaps={this.getAllSwaps}/>
+        : null}
+      </Container>
     );
   }
 }

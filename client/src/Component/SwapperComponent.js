@@ -3,9 +3,9 @@ import React, { Component } from "react";
 class SwapperComponent extends Component {
   render() {
     return (
-      <div>
+      <p>
         {this.props.swapper.username}
-      </div>
+      </p>
     )
   }
 }

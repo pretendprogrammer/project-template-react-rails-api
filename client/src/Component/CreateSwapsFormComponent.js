@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Container, Header, Button, Image, Form, Input, Grid } from 'semantic-ui-react'
 
 class CreateSwapsFormComponent extends Component {
 
@@ -42,22 +43,21 @@ class CreateSwapsFormComponent extends Component {
 
     render() {
         return(
-            <div>
-                <h3>Create a New Swap</h3>
-                <form onSubmit={(event) => {
-                    event.preventDefault()
-                    this.createNewSwap(this.state)
-                    event.target.reset()
-                }}>
-                <label htmlFor="name">Swap Name</label>
-                <input onChange={(event) => this.setState({name: event.target.value})} type="text" id="name" name="name" value={this.state.name} />
-                <label htmlFor="start">Start</label>
-                <input onChange={(event) => this.setState({start: event.target.value})} type="datetime-local" id="start" start="start" value={this.state.start} />
-                <label htmlFor="end">End</label>
-                <input onChange={(event) => this.setState({end: event.target.value})} type="datetime-local" id="end" end="end" value={this.state.end} />
-                <input type="submit" value="Create" />
-                </form>
-            </div>
+            <Container textAlign="center" className="centered-container content-margin">
+                <Header as='h2'>Create a New Swap</Header>
+                <Grid centered>
+                    <Form textAlign="center" className="form-width" onSubmit={(event) => {
+                        event.preventDefault()
+                        this.createNewSwap(this.state)
+                        event.target.reset()
+                    }}>
+                        <Form.Input onChange={(event) => this.setState({name: event.target.value})} placeholder='Swap Name' type="text" id="name" name="name" value={this.state.name} />
+                        <Form.Input onChange={(event) => this.setState({start: event.target.value})} placeholder='Start' type="datetime-local" id="start" start="start" value={this.state.start} />
+                        <Form.Input onChange={(event) => this.setState({end: event.target.value})} placeholder='End' type="datetime-local" id="end" end="end" value={this.state.end} />
+                        <Input type="submit" value="Create" />
+                    </Form>
+                </Grid>
+            </Container>
         )
     }
 }

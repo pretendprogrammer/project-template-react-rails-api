@@ -1,7 +1,7 @@
-
 import React, { Component } from "react";
 import SwapClothingContainer from "./SwapClothingContainer";
 import SwapperListContainer from "../Container/SwapperListContainer";
+import { Container, Header, Button, Card } from 'semantic-ui-react'
 
 class SwapContainer extends Component {
 
@@ -90,17 +90,17 @@ class SwapContainer extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Clothing Swap</h1>
-        <h5>Credits: {this.state.currentSwapUser.credits}</h5>
+      <Container className="centered-container content-margin">
+        <Header as='h1'>Clothing Swap</Header>
+        <Header as='h5'>Credits: {this.state.currentSwapUser.credits}</Header>
         <SwapClothingContainer takeClothing={this.takeClothing} credits={this.state.currentSwapUser.credits} reduceCredits={this.reduceCredits} clothings={this.state.clothings} routerProps={this.props.routerProps} getUserClothing={this.props.getUserClothing} currentUser={this.props.currentUser}/>
         <SwapperListContainer swappers={this.state.swappers}/>
-        <button
+        <Button
         onClick={() => {
           this.props.routerProps.history.push("/home")
         }}
-        >Leave Swap</button>
-      </div>
+        >Leave Swap</Button>
+      </Container>
     );
   }
 }

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import { Container, Header, Button, Card } from 'semantic-ui-react'
 
 class SwapsAvailableComponent extends Component {
 
   render() {
     return (
-      <div>
+      <Container>
         {this.props.swap.name}:{" "}
         {this.props.swap.start.toLocaleString("en-US", {
           // timeZone: "EST",
@@ -16,12 +17,14 @@ class SwapsAvailableComponent extends Component {
           timeStyle: "short",
           // timeZone: "EST",
         })}
-        <button onClick={() => {
+        <br></br>
+        <Button onClick={() => {
           this.props.passSwapInfo(this.props.swap)
+          this.props.getAllSwaps()
           this.props.history.push("/swapCloset")
         }}
-        >Join Swap</button>
-      </div>
+        >Join Swap</Button>
+      </Container>
     );
   }
 }

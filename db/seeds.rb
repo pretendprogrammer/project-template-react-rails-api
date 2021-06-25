@@ -13,8 +13,9 @@ SwapClothing.destroy_all
 
 puts "Seeding new data"
 
-yosef = User.create!(username: "Yosef", password: "admin", bio: "Just here to make some stuff break", image_url: "https://i.kym-cdn.com/entries/icons/facebook/000/033/553/itcrowd.jpg", spirit_color: "#0abf00")
-jenna = User.create!(username: "Jenna", password: "admin", bio: "Just here to make some stuff work", image_url: "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png", spirit_color: "#de0781")
+yosef = User.create!(username: "Yosef", password: "admin", bio: "Just here to make some stuff break", image_url: "https://i.kym-cdn.com/entries/icons/facebook/000/033/553/itcrowd.jpg", spirit_color: "#0abf00", admin: true)
+jenna = User.create!(username: "Jenna", password: "admin", bio: "Just here to make some stuff work", image_url: "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png", spirit_color: "#de0781", admin: true)
+david = User.create!(username: "David", password: "admin", bio: "Clothing Swaps are my fave!", image_url: "https://ca.slack-edge.com/T02MD9XTF-U01GFFVHY94-3b0b69704043-512", spirit_color: "#10ad44", admin: true)
 
 
 

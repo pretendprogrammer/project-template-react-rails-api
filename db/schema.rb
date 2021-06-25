@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 2021_06_17_154851) do
     t.string "bio"
     t.string "image_url"
     t.string "spirit_color"
+    t.boolean "admin"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -3,11 +3,12 @@ import ProfileComponent from "../Component/ProfileComponent";
 import ClosetPreviewContainer from "./ClosetPreviewContainer";
 import FriendListContainer from "./FriendListContainer";
 import SwapListContainer from "./SwapListContainer";
+import { Container, Header, Button } from 'semantic-ui-react'
 
 class HomePageContainer extends Component {
   render() {
     return (
-      <div>
+      <Container className="centered-container content-margin">
         <ProfileComponent {...this.props.currentUser} />
         <ClosetPreviewContainer
           currentUser={this.props.currentUser}
@@ -15,7 +16,7 @@ class HomePageContainer extends Component {
           routerProps={this.props.routerProps}
           getUserClothing={this.props.getUserClothing}
         />
-        <FriendListContainer friends={this.props.friends} getUserClothing={this.props.getUserClothing} routerProps={this.props.routerProps}
+        <FriendListContainer friends={this.props.friends} getUserClothing={this.props.getUserClothing} routerProps={this.props.routerProps} currentClosetUser={this.props.currentClosetUser}
         />
         <SwapListContainer
           userSwaps={this.props.currentUser.swaps}
@@ -24,15 +25,16 @@ class HomePageContainer extends Component {
           passSwapInfo={this.props.passSwapInfo}
           currentUserSwaps={this.props.currentUserSwaps}
           currentSwap={this.props.currentSwap}
+          getCurrentUserSwaps={this.props.getCurrentUserSwaps}
         />
-        <button
+        <Button
           onClick={() =>
             this.props.handleLogout(this.props.routerProps.history)
           }
         >
           Log Out
-        </button>
-      </div>
+        </Button>
+      </Container>
     );
   }
 }
